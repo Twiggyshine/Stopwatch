@@ -157,8 +157,8 @@
 //     return orderFunction;
 //  }
 let output = document.getElementById("output");
-let request = document.getElementById("request");
-let restart = document.getElementById("restart");
+let requestButton = document.getElementById("request");
+let restartButton = document.getElementById("restart");
 
 async function FetchData() {
   let response = await fetch("http://localhost:8090/api/init");
@@ -166,7 +166,18 @@ async function FetchData() {
   return json;
 }
 
-request.addEventListener("click", async () => {
+requestButton.addEventListener("click", async () => {
     let data = await FetchData();
     output.innerText = JSON.stringify(data, null, 2);
 });
+
+async function resetData() {
+  let reset = await fetch("http://localhost:8090/api/restart");
+}
+restartButton.addEventListener("click", async () => {
+  let data = await resetData();
+  output.innerText = ""
+});
+
+
+
