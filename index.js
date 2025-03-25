@@ -160,10 +160,27 @@ let output = document.getElementById("output");
 let requestButton = document.getElementById("request");
 let restartButton = document.getElementById("restart");
 
+// async function FetchData() {
+//   let response = await fetch("http://localhost:8090/api/init");
+//   let json = await response.json();
+//   return json;
+// }
+
 async function FetchData() {
-  let response = await fetch("http://localhost:8090/api/init");
-  let json = await response.json();
-  return json;
+  try {
+    const firstResponse = await fetch('http://localhost:8090/api/init');
+    const firstData = await firstResponse.json();
+
+    if (firstData.ready === true) {  
+      const secondResponse = await fetch('http://localhost:8090/api/ready');
+      const secondData = await secondResponse.json();
+      return secondData;  
+    }
+    return firstData;  
+  } catch (error) {
+    console.error('Ошибка в одном из запросов:', error);
+    throw error;  
+  }
 }
 
 requestButton.addEventListener("click", async () => {
@@ -178,6 +195,8 @@ restartButton.addEventListener("click", async () => {
   let data = await resetData();
   output.innerText = ""
 });
+
+
 
 
 
