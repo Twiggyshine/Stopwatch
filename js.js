@@ -58,3 +58,13 @@
 //   }
 // }
 // servePassengers(passengers);
+
+
+// const greeting = 'привет авито!';
+
+// console.log (greeting.split(' ')[1][0]);
+
+const stack = [1, 2, 3];
+const lastItem = stack.pop(); // 3
+console.log(stack);
+
